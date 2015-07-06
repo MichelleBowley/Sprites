@@ -26,6 +26,13 @@ private:
 
 	GameObject *player3 [Max_Sprites];
 
+	GameObject *Tile1;
+	GameObject *Tile2;
+	GameObject *Tile3;
+	GameObject *Tile4;
+
+	//TODO: Add a game object for each tile needed
+
 
 	int screenWidth = GetSystemMetrics(SM_CXSCREEN); //Gets the width of the current monitor being used
 	int screenHeight = GetSystemMetrics(SM_CYSCREEN); //Gets the height of the current monitor being used

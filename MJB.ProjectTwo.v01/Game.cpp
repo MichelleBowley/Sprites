@@ -24,42 +24,61 @@ Game::~Game()
 		delete dx;
 		dx = 0;
 	}
-	/*if (input)
-	{
-		delete input;
-		input = 0;
-	}*/
+
+	//TODO: delete each tile and set the pointer to null.
+	
 }
 
 bool
 Game::Initialise(HWND hWindow)
 {
-	//double RandomStartX
-	//double RandomStartY
-	//double RandomVelocity = rand() % 10 + 1;
-	//double RandomVeloctyY = rand() % 10 + 1;
 	dx = new DirectX;
 
 	if (!dx->InitDx(hWindow, screenWidth, screenHeight, m_fullscreen))
 	{
 		return false;
 	}
-	int n = 0;
 
-	for (n = 0; n < Max_Sprites -1; n++)
+	int x = 0;
+	//int y;
+	int maxWidth = 5;
+
+	//need to 
+	/*Tile1 = new GameObject(x, y, 0, 0, 0, 0);
+	if (!Tile1->Initialize(dx->d3d9_Device, "Sprites\\Tile1.png", 100, 100))*/
+		//TODO: Make the tiles the background. 
+	
+	//TODO: Create a new gameobject for each tile and initialise 
+	//TODO: Create a way of adding in the tiles reading from a text editor.
+	//int n = 0;
+
+	for (x = 0; x < 5; x++)
 	{
-		float RandomVelocityY = static_cast <float> (rand()) / static_cast <float> (RAND_MAX)*5;
+
+		/*float RandomVelocityY = static_cast <float> (rand()) / static_cast <float> (RAND_MAX)*5;
 		float RandomVelocityX = static_cast <float> (rand()) / static_cast <float> (RAND_MAX)* 5;
 		float RandomVelocity = static_cast <float> (rand()) / static_cast <float> (RAND_MAX)* 5;
 		double RandomStartx = rand() % (sWidth - 56) +10;
-		double RandomStarty = rand() % (sHeight - 81) +10;
-		player3[n] = new GameObject(RandomStartx, RandomStarty, (float)M_PI_4, RandomVelocityY, RandomVelocityX, RandomVelocity);
-		if (!player3[n]->Initialize(dx->d3d9_Device, "Sprites\\p3.png", 32, 32)) //png format to use transcolour 255, 0, 255
+		double RandomStarty = rand() % (sHeight - 81) +10;*/
+		//player3[n] = new GameObject(RandomStartx, RandomStarty, (float)M_PI_4, RandomVelocityY, RandomVelocityX, RandomVelocity);
+		//if (!player3[n]->Initialize(dx->d3d9_Device, "Sprites\\p3.png", 32, 32)) //png format to use transcolour 255, 0, 255
+		//{
+		//	return false;
+		//	//Make mouse a target, and shoot the sparites on screen. Every sprite clicked is then deleted from memory.
+		//}
+		int n = 0;
+		for (n = 0; n < 5; n++)
 		{
+			n + 99;
+			Tile1 = new GameObject(n, 0, 0, 0, 0, 0);
+			if (!Tile1->Initialize(dx->d3d9_Device, "Sprites\\Tile1.png", 100, 100))
+			{
 			return false;
-			//Make mouse a target, and shoot the sparites on screen. Every sprite clicked is then deleted from memory.
+			}
 		}
+		
 
+		
 	}
 	
 	gameTime = new Timer;
@@ -86,13 +105,15 @@ Game::Draw(float gameTime)
 	dx->Clear(D3DCOLOR_XRGB(0, 100, 100));
 	dx->Begin();
 
-	int n = 0;
+	//int n = 0;
 
-	for (n = 0; n < Max_Sprites - 1; n++)
-	{
-		player3[n]->Draw(gameTime);
-	}
+	//for (n = 0; n < Max_Sprites - 1; n++)
+	//{
+	//	player3[n]->Draw(gameTime);
+	//}
 
+	Tile1->Draw(gameTime);
+	//TODO: Add a draw for each tile
 
 	dx->End();
 	dx->PresentBB();
@@ -105,7 +126,7 @@ Game::Update(float gameTime)
 	//input->MouseInput();
 
 
-	int n = 0;
+	/*int n = 0;
 
 	for (n = 0; n < Max_Sprites - 1; n++)
 	{
@@ -114,41 +135,9 @@ Game::Update(float gameTime)
 			player3[n]->Update(gameTime);
 		}
 	}
+*/
+	Tile1->Update(gameTime);
+	//Add a update for each tile
 	
 }
 
-//LRESULT Game::messageHandler(HWND hWindow, UINT msg, WPARAM wParam, LPARAM lParam)
-//{
-//	if (m_running)
-//	{
-//		switch (msg)
-//		{
-//		case 122: //f12 part of debug. using f11 to toggle between fullscreen and windowed mode
-//			if (m_fullscreen)
-//			{
-//				m_fullscreen = false;
-//				SetWindowLong(hWindow, GWL_STYLE, WS_OVERLAPPEDWINDOW);
-//				SetWindowPos(hWindow, HWND_TOP, screenWidth / 2 - (sWidth / 2), screenHeight / 2 - (sHeight / 2), sWidth, sHeight, SWP_FRAMECHANGED | SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
-//				RECT clientRect;
-//				GetClientRect(hWindow, &clientRect);
-//				MoveWindow(hWindow, screenWidth / 2 - (sWidth / 2), screenHeight / 2 - (sHeight / 2), sWidth, sHeight, TRUE);
-//			}
-//			else
-//			{
-//				m_fullscreen = true;
-//				SetWindowLong(hWindow, GWL_STYLE, WS_EX_TOPMOST | WS_VISIBLE | WS_POPUP);
-//				SetWindowPos(hWindow, HWND_TOP, 0, 0, screenWidth, screenHeight, NULL);
-//			}
-//			return 0;
-//			break;
-//
-//		case WM_DESTROY:
-//			DestroyWindow(hWindow);
-//			m_running = false;
-//			PostQuitMessage(0);
-//			return 0;
-//			break;
-//		}
-//		return DefWindowProc(hWindow, msg, wParam, lParam);    // let Windows handle it
-//	}
-//}
