@@ -16,15 +16,29 @@ public:
 	void Draw(float gameTime);
 	void Update(float gameTime);
 
-	static const int Max_Sprites = 100;
+	//static const int Max_Sprites = 100;
+	static const int max_Width = 500;
 
 private:
 	DirectX *dx;
 	//GameObject *player;
 	//GameObject *player2;
+	int y = 0;
+	int tileWidth = 100;
+	int tileHeight = 100;
+	int x = 0;
+	int n = 0;
 
 
-	GameObject *player3 [Max_Sprites];
+	//GameObject *player3 [Max_Sprites];
+	GameObject *tile1[max_Width];
+
+	//GameObject *Tile1;
+	GameObject *Tile2;
+	GameObject *Tile3;
+	GameObject *Tile4;
+
+	//TODO: Add a game object for each tile needed
 
 
 	int screenWidth = GetSystemMetrics(SM_CXSCREEN); //Gets the width of the current monitor being used
